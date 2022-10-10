@@ -1,0 +1,58 @@
+import {DAYS} from "../Constants/index";
+
+export const endPoints = {
+    anime: function (animeId, request = '') {
+        return request ? 'https://api.jikan.moe/v4/anime/${animeId}/${request}' : 'https://api.jikan.moe/v4/anime/${animeId}';
+    },
+    season: function (season, year) {
+        return {
+            id: '${season.title} ${year.title}',
+            url: 'https://api.jikan.moe/v4/season/${year.id}/${season.id}',
+            path: "anime"
+        };
+    },
+    schedule: function (queryDay) {
+        return {
+            id: 'Anime on ${queryDay.title}',
+            url: 'https://api.jikan.moe/v4/schedule/${queryDay.id}',
+            path: queryDay.id
+        };
+    },
+    search: function (obj) {
+        return {
+            id: 'Search Results',
+            url: `https://api.jikan.moe/v4/search/anime?q=${obj.searchQuery}&page=${obj.pageNo}&order_by=${obj.orderBy}&sort=${obj.sort}&genre=${obj.genre}&rated=${obj.rating}`,
+            path: 'results'
+        };
+    },
+    genre: function (genre) {
+        return {
+            id: genre.title,
+            url: 'https://api.jikan.moe/v4/genre/anime/${genre.id}',
+            path: "anime"
+        };
+    },
+    airingToday: function() {
+        const date = new Date();
+        const today = DAYS[date.getDay()].id;
+        return {
+            id: "Airing Today",
+            url: "https://api.jikan.moe/v4/schedule/${today}",
+            path: today
+        };
+    },
+    topAiring: function () {
+        return {
+            id: "Top Airing",
+            url: "https://api.jikan.moe/v4/top/anime/1/airing",
+            path: "top"
+        };
+    },
+    upcoming: function () {
+        return {
+            id: "Upcoming Anime",
+            url: "https://api.jikan.moe/v4/season/later",
+            path: "anime"
+        };
+    }
+}
