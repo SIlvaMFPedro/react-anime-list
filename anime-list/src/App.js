@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <Fragment>
-      <Router basename="/react-anime-list">
+      <Router basename="/anime-list">
         <div className={styles.mainSection}>
           <div className={styles.header}>
             <Header/>
