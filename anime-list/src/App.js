@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWindowView } from "./Store/action";
+import { getViewType, DESKTOP_VIEW } from './Constants/index';
+import Header from "./Components/Header";
+import MainContent from "./Pages/MainContent";
 
-function App() {
+import styles from './Styles/App.module.scss';
+
+export default function App() {
+
+  const isMenuOpen = useSelector((state) => state.isMenuOpen);
+  const windowViewType = useSelector((state) => state.windowViewType);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function updateWidth() {
+    dispatch(setWindowView(getViewType(window.innerWidth)));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Router basename="/react-anime-list">
+        <div className={styles.mainSection}>
+          <div className={styles.header}>
+            <Header/>
+          </div>
+          <div className={styles.mainContent}>
+            <MainContent/>
+          </div>
+        </div>
+      </Router>
+    </Fragment>
   );
 }
-
-export default App;
