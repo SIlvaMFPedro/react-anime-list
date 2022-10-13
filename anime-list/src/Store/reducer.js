@@ -10,7 +10,7 @@ import {
 } from "../Constants/index";
 
 const defaultState = {
-    searchFilter = "",
+    searchFilter : "",
     genreFilter: {
         filterSet: new Set(),
         value: ""

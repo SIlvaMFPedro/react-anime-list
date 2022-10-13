@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setWindowView } from "./Store/action";
 import { getViewType, DESKTOP_VIEW } from './Constants/index';
@@ -28,12 +28,10 @@ export default function App() {
     <Fragment>
       <Router basename="/anime-list">
         <div className={styles.mainSection}>
-          <div className={styles.header}>
-            <Header/>
-          </div>
-          <div className={styles.mainContent}>
-            <MainContent/>
-          </div>
+          <Routes>
+            <Route path="/header" element={<Header/>}/>
+            <Route path="/" element={<MainContent/>}/>
+          </Routes>
         </div>
       </Router>
     </Fragment>
