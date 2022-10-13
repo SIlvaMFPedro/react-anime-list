@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import classes from '../Styles/Components/PortraitCarousel.module.scss';
 import leftArrowIcon from '../Assets/left-arrow.png';
 import rightArrowIcon from '../Assets/right-arrow.png';
@@ -10,7 +10,7 @@ const divWidth = 0.85;
 export default function PortraitCarousel({ endPoint }) {
 
     const rowRef = useRef(null);
-    const history = useHistory();
+    const navigate = useNavigate();
     const [showNav, setShowNav] = useState(false);
     const [anime, setAnime] = useState([]);
     const [mainContentWidth, setMainContentWidth] = useState(rowRef.current?.offsetWidth);
@@ -51,7 +51,7 @@ export default function PortraitCarousel({ endPoint }) {
     }
 
     function onClickHandler(id){
-        history.push(`/anime/${id}`);
+        navigate(`/anime/${id}`);
     }
 
     if (anime.length === 0) {

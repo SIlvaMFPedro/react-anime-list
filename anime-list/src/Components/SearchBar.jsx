@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearchFilter } from "../Store/action";
-import { useHistory } from "react-router";
+import { useNavigate } from 'react-router-dom';
 import { TABLET_VIEW, MOBILE_VIEW } from "../Constants/index";
 import styles from "../Styles/Components/SearchBar.module.scss";
 import searchIcon from "../Assets/search.svg";
@@ -10,7 +10,7 @@ import searchIcon from "../Assets/search.svg";
 export default function SearchBar({ setShowLogo }) {
     
     const inputRef = useRef(null);
-    const history = useHistory();
+    const navigate = useNavigate();
     const windowViewType = useSelector((state) => state.windowViewType);
     const clearFilter = useSelector((state) => state.clearFilter);
     const genre = useSelector((state) => state.genreFilter);
@@ -40,7 +40,7 @@ export default function SearchBar({ setShowLogo }) {
         if ((windowViewType === TABLET_VIEW || windowViewType === MOBILE_VIEW) && !event.target.value && !searchBarMini){
             setSearchBarMini(true);
         }
-        history.push(`/listing/search?q=${event.target.value}&genre=${genre.value}&rating=${rating.value}`);
+        navigate(`/listing/search?q=${event.target.value}&genre=${genre.value}&rating=${rating.value}`);
     }
 
     function onClickHandler(){

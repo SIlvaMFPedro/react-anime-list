@@ -1,14 +1,14 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import classes from '../Styles/Pages/NoMatch.module.scss';
 
 export default function Error() {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function handleClick() {
-        history.push("/");
+        navigate("/");
     }
 
     return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MOBILE_VIEW } from "../Constants/index";
 import styles from '../Styles/Components/LandscapeCarousel.module.scss';
@@ -12,7 +12,7 @@ import fetchAPI from '../API/index';
 export default function LandscapeCarousel({ endPoint }) {
 
     const windowViewType = useSelector((state) => state.windowViewType);
-    const history = useHistory();
+    const navigate = useNavigate();
     const [showNav, setShowNav] = useState(false);
     const [anime, setAnime] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,7 +51,7 @@ export default function LandscapeCarousel({ endPoint }) {
     }
 
     function onClickHandler(id) {
-        history.push(`/anime/${id}`);
+        navigate(`/anime/${id}`);
     }
 
     if (anime.length === 0){

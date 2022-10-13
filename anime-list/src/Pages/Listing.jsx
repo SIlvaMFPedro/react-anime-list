@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { endPoints } from "../API/endpoints";
 import { DAYS, SEASONS, getYearList, SEARCHOBJECT } from "../Constants/index";
 import styles from '../Styles/Pages/Listing.module.scss';
@@ -7,7 +7,7 @@ import fetchAPI from '../API/index';
 
 export default function Listing() {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     const { id } = useParams();
@@ -57,7 +57,7 @@ export default function Listing() {
             sObj.rating = query.get("rating");
             sObj.genre = query.get("genre");
             if (!(sObj.searchQuery.trim() || sObj.rating || sObj.genre))
-                history.push('/');
+                navigate('/');
             const endPoint = endPoints.search(sObj);
             setAPI(endPoint);
             setTitle(endPoint.id);
@@ -65,11 +65,11 @@ export default function Listing() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, location]);
 
-    function onClickHandler(id){
-        history.push(`/anime/${id}`);
+    function onClickHandler(id) {
+        navigate(`/anime/${id}`);
     }
 
-    if (anime.length === 0){
+    if (anime.length === 0) {
         return <h3>No results were found!</h3>;
     }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { endPoints } from "../API/endpoints";
 import fetchAPI from "../API/index";
 
@@ -48,10 +48,10 @@ function Related({ anime }){
 
 function Recommendations({ recommendations }){
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function onClickHandler(id) {
-        history.push(`/anime/${id}`);
+        navigate(`/anime/${id}`);
     }
 
     return (
