@@ -23,18 +23,10 @@ export default function MainContent() {
             <ErrorBoundary>
               <Suspense fallback={null} >
                 <Routes>
-                  <Route exact path="/">
-                    <Home />
-                  </Route>
-                  <Route path="/anime/:id">
-                    <Anime setVerticalScroll={setVerticalScroll} />
-                  </Route>
-                  <Route path="/listing/:id">
-                    <Listing />
-                  </Route>
-                  <Route path="*">
-                    <Error />
-                  </Route>
+                  <Route exact path="/" element={<Home/>}/>
+                  <Route path="/anime/:id" element={<Anime setVerticalScroll={setVerticalScroll} />}/>
+                  <Route path="/listing/:id" element={<Listing/>}/>
+                  <Route path="*" element={<Error/>}/>
                 </Routes>
               </Suspense>
             </ErrorBoundary>

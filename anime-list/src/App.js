@@ -14,6 +14,8 @@ export default function App() {
   const windowViewType = useSelector((state) => state.windowViewType);
   const dispatch = useDispatch();
 
+  
+
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
@@ -29,8 +31,15 @@ export default function App() {
       <Router basename="/anime-list">
         <div className={styles.mainSection}>
           <Routes>
-            <Route path="/header" element={<Header/>}/>
-            <Route path="/" element={<MainContent/>}/>
+            <Route path="/" element={
+              <>
+              <div className={styles.header}>
+                <Header/>
+              </div>
+              <div className={styles.mainContent}>
+                <MainContent/>
+              </div>
+              </>}/>
           </Routes>
         </div>
       </Router>
