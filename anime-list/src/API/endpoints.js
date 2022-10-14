@@ -7,28 +7,28 @@ export const endPoints = {
     season: function (season, year) {
         return {
             id: '${season.title} ${year.title}',
-            url: 'https://api.jikan.moe/v4/season/${year.id}/${season.id}',
+            url: 'https://api.jikan.moe/v4/seasons/${year.id}/${season.id}',
             path: "anime"
         };
     },
     schedule: function (queryDay) {
         return {
             id: 'Anime on ${queryDay.title}',
-            url: 'https://api.jikan.moe/v4/schedule/${queryDay.id}',
+            url: 'https://api.jikan.moe/v4/schedules?filter=${queryDay.id}',
             path: queryDay.id
         };
     },
     search: function (obj) {
         return {
             id: 'Search Results',
-            url: `https://api.jikan.moe/v4/search/anime?q=${obj.searchQuery}&page=${obj.pageNo}&order_by=${obj.orderBy}&sort=${obj.sort}&genre=${obj.genre}&rated=${obj.rating}`,
+            url: `https://api.jikan.moe/v4/anime?q=${obj.searchQuery}&page=${obj.pageNo}&order_by=${obj.orderBy}&sort=${obj.sort}&genres=${obj.genre}&rating=${obj.rating}`,
             path: 'results'
         };
     },
     genre: function (genre) {
         return {
             id: genre.title,
-            url: 'https://api.jikan.moe/v4/genre/anime/${genre.id}',
+            url: 'https://api.jikan.moe/v4/genre/anime?filter=${genre.id}',
             path: "anime"
         };
     },
@@ -37,21 +37,21 @@ export const endPoints = {
         const today = DAYS[date.getDay()].id;
         return {
             id: "Airing Today",
-            url: "https://api.jikan.moe/v4/schedule/${today}",
+            url: `https://api.jikan.moe/v4/schedules?filter=${today}`,
             path: today
         };
     },
     topAiring: function () {
         return {
             id: "Top Airing",
-            url: "https://api.jikan.moe/v4/top/anime/1/airing",
+            url: "https://api.jikan.moe/v4/top/anime?filter=airing",
             path: "top"
         };
     },
     upcoming: function () {
         return {
             id: "Upcoming Anime",
-            url: "https://api.jikan.moe/v4/season/later",
+            url: "https://api.jikan.moe/v4/seasons/upcoming",
             path: "anime"
         };
     }
