@@ -60,7 +60,7 @@ export default function ApiData(props) {
             SeachAnime(props.SearchValue).then(data => {
                 props.setData(data.results)
                 setLoading(false)
-            }).catch(() => (Alert.alert('Error', 'Verify your connection')))
+            }).catch(() => (alert('Error', 'Verify your connection')))
 
         }, [SeachAnime, props, props.SearchValue]
     )
