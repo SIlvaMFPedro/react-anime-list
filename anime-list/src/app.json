@@ -1,0 +1,33 @@
+{
+    "expo": {
+        "name": "anime-list",
+        "slug": "anime-list",
+        "version": "1,0.0",
+        "orientation": "portrait",
+        "icon": "./Assets/animelist_icon.jpg",
+        "splash": {
+            "image": "./Assets/animelist_application.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetsBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./Assets/favicon.ico",
+                "backgroundColor": "#FFFFFF"
+            },
+            "package": "com.silvamfpedro.animelist"
+        },
+        "web": {
+            "favicon": "./Assets/favicon.ico"
+        }
+    }
+}
