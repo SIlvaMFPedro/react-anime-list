@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StatusBar, StyleSheet, View } from 'react-native';
-import Context,{ AnimeContext } from "./API/context";
+import Context, { AnimeContext } from "./API/context";
 import Tabs from "./Components/Tabs";
 
 const styles = StyleSheet.create({

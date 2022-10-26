@@ -125,7 +125,8 @@ const Home = () => {
                     </View>
             }
         </View>
-    )
+    );
+    
 }
 
 export default Home;
