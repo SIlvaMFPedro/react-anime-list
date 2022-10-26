@@ -1,5 +1,5 @@
 # react-anime-list
-This project is an anime listing application for searching animes using a modern UI based on React
+This project is an android anime listing application for searching animes using a modern UI based on React Native
 
 ## API
 - [Jikan Unofficial MyAnimeList API (Open Source Public API)](https://jikan.moe/);
@@ -9,5 +9,5 @@ This project is an anime listing application for searching animes using a modern
 - SCSS;
 - JavaScript;
 - ReactJS (UI Library);
-- Redux (State Management Library);
-- React Router (Client Side Routing Library)
+- Expo CLI;
+- Android;
