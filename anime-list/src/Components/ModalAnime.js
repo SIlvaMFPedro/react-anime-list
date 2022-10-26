@@ -1,25 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
-import React, { useContext } from 'react';
-import { Modal, View, Text, StyleSheet, Button, Image } from 'react-native';
+import React, { useContext } from 'react'
+import { Modal, View, Text, StyleSheet, Button, Image } from 'react-native'
 import { AnimeContext } from '../API/context';
-
-const styles = StyleSheet.create({
-    details: {
-        alignSelf: 'flex-end',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '50%',
-        height: '95%'
-    },
-    img: {
-        alignContent: 'flex-start',
-        height: 250,
-        width: 160,
-        margin: '2%',
-        marginTop: '6%'
-    }
-});
-
 
 export default function (props) {
     const { darkTheme } = useContext(AnimeContext);
@@ -114,5 +95,23 @@ export default function (props) {
                 </View>
             </View>
         </Modal>
-    );
+    )
 }
+
+const styles = StyleSheet.create({
+    details: {
+        alignSelf: 'flex-end',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '50%',
+        height: '95%',
+    },
+    img: {
+        alignContent: 'flex-start',
+        height: 250,
+        width: 160,
+        margin: '2%',
+        marginTop: '6%'
+
+    }
+})
