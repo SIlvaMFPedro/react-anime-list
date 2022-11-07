@@ -9,7 +9,8 @@ const Context = ({ children }) => {
     const [error, setError] = useState('');
 
     const fetchAnimeCategories = async (id) => {
-        const { data } = await axios.get(`https://api.jikan.moe/v4/genres/anime?filter=${id}`);
+        // const { data } = await axios.get(`https://api.jikan.moe/v4/genres/anime?filter=${id}`);
+        const { data } = await axios.get(`https://api.jikan.moe/v4/anime?genres=${id}`);
         // console.log(data);
         setIndex(1);
         return data;

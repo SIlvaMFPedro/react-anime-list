@@ -8,6 +8,7 @@ import AnimeList from './AnimeList'
 import { ScrollView, Dimensions } from 'react-native';
 
 export default function Category() {
+
   const { darkTheme } = useContext(AnimeContext);
   const screen = Dimensions.get("screen");
   const [Data, setData] = useState([])
@@ -16,7 +17,9 @@ export default function Category() {
   const [Target, setTarget] = useState()
   const [SearchValue, setSearchValue] = useState()
 
-  const categoriesList = ['1', '27', '36', '6', '7', '24', '4', '30', '21']
+  // const categoriesList = ['1', '27', '36', '6', '7', '24', '4', '30', '21'];
+
+  const categoriesList = ['1', '27', '24']  // The app does not show more than 2 category lists at the same time for some reason...
 
   // mal_id -> category
   // 1      -> Action

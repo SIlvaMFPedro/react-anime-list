@@ -7,6 +7,9 @@ const windowWidth = Dimensions.get("window").width;
 const SLIDE_WIDTH = Math.round(windowWidth / 3.5);
 
 const AnimeList = ({ id, setTarget, setVisible }) => {
+
+    const genreNames = {1: "Action", 27: "Shounnen", 24: "Sci-fi"};
+
     const { fetchAnimeCategories, darkTheme, setError } = useContext(AnimeContext);
     const [Loading, setLoading] = useState(true)
     const [GenreName, setGenreName] = useState('')
@@ -15,13 +18,20 @@ const AnimeList = ({ id, setTarget, setVisible }) => {
     useEffect(
         () => {
             fetchAnimeCategories(id).then(data => {
-                setGenreList(data.anime)
-                setGenreName(data.mal_url.name)
-                setLoading(false)
-            }).catch(e => setError(e))
+                if(id){
+                    console.log(id);
+                }
+                
+                setGenreList(data.data);
 
-        }, []
+                setGenreName(genreNames[id]);
+
+                setLoading(false);
+            }).catch(e => setError(e))
+        }, [id]
     )
+    
+    console.log(GenreName);
 
     return (
         <View style={{ backgroundColor: darkTheme ? '#282C35' : '#f2f2f2', marginTop: 20 }} horizontal key={id}>
@@ -44,7 +54,7 @@ const AnimeList = ({ id, setTarget, setVisible }) => {
                                     setVisible(true)
                                 }}
                                     key={index}>
-                                    <Image source={{ uri: item.image_url }} style={{
+                                    <Image source={{ uri: item.images.jpg.image_url }} style={{
                                         height: 100,
                                         width: 100,
                                         margin: 10
