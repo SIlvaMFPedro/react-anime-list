@@ -9,17 +9,45 @@ const screen = Dimensions.get("screen");
 export default function ApiData(props) {
 
     const { SearchAnime, darkTheme } = useContext(AnimeContext);
-    const [Loading, setLoading] = useState(true)
+
+    const [LogData, setLogData] = useState();
+    const [Error, setError] = useState();
+    const [Loading, setLoading] = useState(true);
 
     useEffect(
         () => {
             SearchAnime(props.SearchValue).then(data => {
-                props.setData(data.results)
-                setLoading(false)
+                props.setData(data.data);
+                setLoading(false);
             }).catch(() => (Alert.alert('Error', 'Verify your connection')))
 
         }, [props.SearchValue]
-    )
+    );
+
+    /* useEffect(
+        () => {
+            (async function runEffect() {
+                const animeSearch = await SearchAnime(props.SearchValue);
+                if (animeSearch && animeSearch.length > 0){
+                    console.log(animeSearch);
+                    setLogData(animeSearch);
+                    setLoading(false);
+                    if(LogData){
+                        // console the output only if available
+                        console.log(LogData);
+                    }
+                }
+                else{
+                    setError("Error! Verify your connection");
+                    setLoading(false);
+                }
+            })();
+        }, [props.SearchValue]
+    ); */
+
+
+    // console.log(props.SearchValue);
+    // console.log(props.Data);
 
     return (
         <View style={{
@@ -31,7 +59,7 @@ export default function ApiData(props) {
                     <ScrollView horizontal={true} showsVerticalScrollIndicator={false}>
                         <FlatList
                             data={props.Data}
-                            keyExtractor={item => item.mal_id}
+                            keyExtractor={(item, index) => index.toString() }
                             renderItem={({ item }) => (
                                 <View style={Styles.searchContainer} key={item.mal_id}>
                                     <View style={Styles.left}>
@@ -39,7 +67,7 @@ export default function ApiData(props) {
                                             props.setTarget(item)
                                             props.setVisible(true)
                                         }}>
-                                            <Image source={{ uri: item.image_url }} style={Styles.anime} />
+                                            <Image source={{ uri: item.images.jpg.image_url }} style={Styles.anime} />
                                         </TouchableOpacity>
                                     </View>
                                     <TouchableOpacity onPress={() => {

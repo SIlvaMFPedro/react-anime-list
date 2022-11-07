@@ -10,6 +10,7 @@ const Context = ({ children }) => {
 
     const fetchAnimeCategories = async (id) => {
         const { data } = await axios.get(`https://api.jikan.moe/v4/genres/anime?filter=${id}`);
+        // console.log(data);
         setIndex(1);
         return data;
     };
@@ -37,6 +38,7 @@ const Context = ({ children }) => {
     const SearchAnime = async (inputText) => {
         try {
             const { data } = await axios.get(`https://api.jikan.moe/v4/anime?q=${inputText}`);
+            // console.log(data.data);
             return data;
         } catch (error) {
             setError(error);

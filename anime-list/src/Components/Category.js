@@ -18,6 +18,17 @@ export default function Category() {
 
   const categoriesList = ['1', '27', '36', '6', '7', '24', '4', '30', '21']
 
+  // mal_id -> category
+  // 1      -> Action
+  // 27     -> Shounnen
+  // 36     -> Slice of Life
+  // 6      -> Mythology 
+  // 7      -> Mystery
+  // 24     -> Sci-Fi
+  // 4      -> Comedy
+  // 30     -> Sports
+  // 21     -> Samurai
+
   return (
     <ScrollView style={{ backgroundColor: darkTheme ? "#282C35" : "white" }} >
 
