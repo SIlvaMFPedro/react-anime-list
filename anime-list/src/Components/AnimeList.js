@@ -8,7 +8,17 @@ const SLIDE_WIDTH = Math.round(windowWidth / 3.5);
 
 const AnimeList = ({ id, setTarget, setVisible }) => {
 
-    const genreNames = {1: "Action", 27: "Shounnen", 24: "Sci-fi"};
+    const genreNames = {
+        1: "Action Anime", 
+        27: "Shounnen Anime", 
+        36: "Slice of Life Anime",
+        6: "Mythology Anime", 
+        7: "Mystery Anime", 
+        24: "Sci-fi Anime", 
+        4: "Comedy Anime", 
+        30: "Sports Anime", 
+        21: "Samurai Anime"
+    };
 
     const { fetchAnimeCategories, darkTheme, setError } = useContext(AnimeContext);
     const [Loading, setLoading] = useState(true)
