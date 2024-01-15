@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0
+}
+
+/* Sidebar Component */
+.sidebar--card {
+    display: flex;
+}
+
+.sidebar--rank {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.sidebar--title {
+    margin-left: 8px;
+}
