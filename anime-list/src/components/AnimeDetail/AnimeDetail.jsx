@@ -93,7 +93,7 @@ function AnimeDetail(){
               <div className="character">
                 {characters?.map((item) => {
                   return (
-                    <div className="character--item">
+                    <div className="character--item" key={item.character.mal_id}>
                       <span>{item.character.name}</span>
                       <div>
                         <img

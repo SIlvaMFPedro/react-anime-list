@@ -7,6 +7,7 @@ import { Favorite as FavoriteIcon } from "@mui/icons-material";
 import { Star as StarIcon } from "@mui/icons-material";
 import { LiveTv as LiveTvIcon } from "@mui/icons-material";
 import { CalendarMonth as CalendarMonthIcon } from "@mui/icons-material";
+import { nanoid } from "nanoid";
 
 function MainContent(props){
     const [state, setState] = React.useState(null);
@@ -25,10 +26,10 @@ function MainContent(props){
     }
 
     const filters = [
-        {name: "popular", query: "bypopularity", icon: <FavoriteIcon/>},
-        {name: "upcoming", query: "upcoming", icon: <CalendarMonthIcon/>},
-        {name: "favorite", query: "favorite", icon: <StarIcon/>},
-        {name: "airing", query: "airing", icon: <LiveTvIcon/>},
+        {name: "popular", query: "bypopularity", id: nanoid(), icon: <FavoriteIcon/>},
+        {name: "upcoming", query: "upcoming", id: nanoid(), icon: <CalendarMonthIcon/>},
+        {name: "favorite", query: "favorite", id: nanoid(), icon: <StarIcon/>},
+        {name: "airing", query: "airing", id:nanoid(), icon: <LiveTvIcon/>},
     ];
 
     return (
@@ -43,7 +44,7 @@ function MainContent(props){
                     <Menu id="fade-menu" MenuListProps={{"aria-labelledby": "fade-button"}} anchorEl={state} open={open} onClose={handleClose} TransitionComponent={Fade}>
                         {filters.map((filter) => {
                             return (
-                                <Filter fetchFilter={fetchFilter} filter={filter} handleClose={handleClose}/>
+                                <Filter key={filter.id} fetchFilter={fetchFilter} filter={filter} handleClose={handleClose}/>
                             );
                         })}
                     </Menu>
