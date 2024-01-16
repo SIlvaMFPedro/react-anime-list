@@ -8,6 +8,13 @@ const getAnime = async (type) => {
     return [...firstInfo.data, ...lateInfo.data];
 };
 
+const getFilteredAnime = async (filter) => {
+    const baseURL = `https://api.jikan.moe/v4/top/anime?filter=${filter}`;
+    const response = await fetch(baseURL);
+    const info = await response.json();
+    // Return filtered anime data
+    return info.data;
+}
 const getAnimeById = async (id) => {
     const baseURL = `https://api.jikan.moe/v4/anime/${id}`;
     const response = await fetch(baseURL);
@@ -16,6 +23,6 @@ const getAnimeById = async (id) => {
     return info.data;
 };
 
-export { getAnimeById };
+export { getFilteredAnime, getAnimeById };
 
 export default getAnime;
