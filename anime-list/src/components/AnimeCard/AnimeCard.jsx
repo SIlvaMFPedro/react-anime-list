@@ -1,18 +1,53 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { nanoid } from "nanoid";
+import { Link } from "react-router-dom";
 import './AnimeCard.css';
 
-function AnimeCard({ anime }){
+function AnimeCard(props){
+    const {
+        id,
+        imgUrl,
+        title,
+        score,
+        year,
+        genres,
+        type
+    } = props;
+
+
     return (
-        <article className="anime--card">
-            <NavLink key={`${anime.mal_id}-link`} to={`/anime/${anime.mal_id}` && `/anime/${anime.mal_id}`}>
-                <figure>
-                    <img src={anime.images.jpg.large_image_url} alt="Anime"/>
-                </figure>
-                <h3>{anime.title}</h3>
-            </NavLink>
-        </article>
+        <Link to={`details/${title}/${id}`} id={id} data-testid={`${id}-card`}>
+            <img src={imgUrl} alt={title}/>
+            <div className="details">
+                <h2>{title}</h2>
+                <div className="row airing">
+                    <p className="box">{type}</p>
+                    {year && (<p className="box">{year}</p>)}
+                </div>
+                <ul className="row genres--container">
+                    {genres.map((genre) => {
+                        <li key={nanoid()} className="box genre">{genre.name}</li>
+                    })}
+                </ul>
+                <p className="box score" data-testid="score">{score}</p>
+            </div>
+        </Link>
     );
 }
+
+AnimeCard.defaultProps = {
+    year: 'Not Specified',
+};
+
+AnimeCard.propTypes = {
+    id: PropTypes.number.isRequired,
+    imgUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
+    year: PropTypes.number,
+    genres: PropTypes.arrayOf(String).isRequired,
+    type: PropTypes.string.isRequired,
+};
 
 export default AnimeCard;

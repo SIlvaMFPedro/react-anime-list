@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, NavLink} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { nanoid } from "nanoid";
+import { getAnimeById, getAnimeCharactersById } from "../../store/utils/apiHandling";
+import { changePage } from "../../store/pageDetails/pageDetails";
+import LoadingPage from "../LoadingPage/LoadingPage";
 import { ArrowBackIos as ArrowBackIosIcon } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import './AnimeDetail.css';
@@ -8,10 +13,12 @@ function AnimeDetail(){
 
     const imgUrl = require(`../../assets/images/MAL-icon.png`);
 
-    const { category } = useParams();
-    const [anime, setAnime] = useState([]);
-    const [characters, setCharacters] = useState([]);
+    const dispatch = useDispatch();
+    const { title, id } = useParams();
+    const [anime, setAnime] = useState({});
+    const [characters, setCharacters] = useState({});
 
+    /** 
     const fetchAnime = async (category) => {
         const temp = await fetch(`https://api.jikan.moe/v4/anime/${category}`).then((res) => res.json());
         setAnime(temp.data);
@@ -23,75 +30,66 @@ function AnimeDetail(){
         let sortedData = temp?.data.sort((a, b) => a.favorites < b.favorites ? 1 : -1);
         setCharacters(sortedData?.slice(0, 10));
     }
+    */
 
     useEffect(() => {
-        if (category) {
-            fetchAnime(category);
-            fetchCharacters(category);
-        }
-    }, [category]);
+      async function fetchAnime(){
+        const result = await getAnimeById(id);
+        setAnime(result.data);
+      }
+
+      async function fetchCharacters() {
+        const result = await getAnimeCharactersById(id);
+        setCharacters(result.data);
+      }
+
+      fetchAnime();
+      fetchCharacters();
+
+      dispatch(changePage(title));
+    }, [dispatch, id, title]);
 
     return (
-        <div>
-          <h1 className="title">
-            <NavLink to="/">
-              <Tooltip title="Back">
-                <ArrowBackIosIcon className="back--button" fontSize="large" />
-              </Tooltip>
-            </NavLink>
-            {anime?.title_english || anime?.title_japanese}
-            <a href={anime?.url} target="_blank" rel="noreferrer">
-              <img src={imgUrl} height="28px" width="28px" alt="" title="View at MyAnimeList.net"/>
-            </a>
-          </h1>
-          <div className="background--text">
-            <div>{anime?.synopsis}</div>
-            <div>{anime?.background}</div>
-          </div>
-          <div className="list--group">
+      (anime.title ? (
+        <div className="anime--details">
+          <div className="anime--info">
             <div className="image--container">
-              <img src={anime?.images?.jpg?.image_url} alt=""></img>
+              <img src={anime.images.webp.large_image_url} alt={anime.title} />
             </div>
-            <div className="text--container">
-              <div>
-                <span className="dark--text">Rank: </span>
-                <span>{anime?.rank}</span>
-              </div>
-              <div>
-                <span className="dark--text">Popularity: </span>
-                <span>{anime?.popularity}</span>
-              </div>
-              <div>
-                <span className="dark--text">Score: </span>
-                <span>{anime?.score}</span>
-              </div>
-              <div>
-                <span className="dark--text">Members: </span>
-                <span>{anime?.members}</span>
-              </div>
-              <div>
-                <span className="dark--text">Source: </span>
-                <span>{anime?.source}</span>
-              </div>
-              <div>
-                <span className="dark--text">Duration: </span>
-                <span>{anime?.duration}</span>
-              </div>
-              <div>
-                <span className="dark--text">Status: </span>
-                <span>{anime?.status}</span>
-              </div>
-              <div>
-                <span className="dark--text">Rating: </span>
-                <span>{anime?.rating}</span>
-              </div>
+            <div className="anime--description">
+              <h2>{anime.title}</h2>
+              <h3>{anime.title_japanese}</h3>
+              <ul className="row genres">
+                {anime.genres.map((genre) => (
+                  <li key={nanoid()} className="box genre-box">{genre.name}</li>
+                ))}
+              </ul>
+              <a href={anime.url} target="_blank" rel="noreferrer">
+                <img src={imgUrl} height="28px" width="28px" alt="" title="View at MyAnimeList.net"/>
+              </a>
             </div>
           </div>
-          {characters?.length > 0 && (
+          <h3 className="title"> Trailer </h3>
+          {anime.trailer.embed_url ? (
+            <div className="trailer--section">
+              <div align="center">
+                <iframe
+                  id="inLineFrameExample"
+                  title="YouTube Video Player"
+                  style={{width: 1000, height: 500, border:0}}
+                  src={anime.trailer.embed_url.replace('&autoplay=1', '')}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ) : <p>{'We couldn\'t find any link. Sorry :('}</p>}
+          <h3 className="title"> Characters </h3>
+          {characters.length > 0 ? (
             <div className="character--section">
               <h1 className="title">Characters</h1>
               <div className="character">
-                {characters?.map((item) => {
+                {characters.map((item) => {
                   return (
                     <div className="character--item" key={item.character.mal_id}>
                       <span>{item.character.name}</span>
@@ -108,25 +106,52 @@ function AnimeDetail(){
                 })}
               </div>
             </div>
-          )}
-          {anime?.trailer?.embed_url ? (
-            <div className="trailer--section">
-              <h1 className="title">Trailer</h1>
-              <div align="center">
-                <iframe
-                  id="inlineFrameExample"
-                  title="Inline Frame Example"
-                  width="1000"
-                  height="500"
-                  src={anime?.trailer?.embed_url}
-                ></iframe>
-              </div>
+          ) : <p>{'We couldn\'t find any characters from the anime. Sorry :('}</p>}
+          <div className="stats">
+            <div className="airing">
+              <h3 className="title"> Airing Information </h3>
+              <p className="box details--box">
+                {`Year: ${anime.year ? anime.year : 'Not Specified'}`}
+              </p>
+              <p className="box details--box">
+                {`Episodes: ${anime.episodes ? anime.episodes : 'Not Specified'}`}
+              </p>
+              <p className="box details--box">
+                {`Duration: ${anime.duration ? anime.duration : 'Not Specified'}`}
+              </p>
+              <p className="box details--box">{`Status: ${anime.status ? anime.status : 'Not Specified'}`}</p>
             </div>
-          ) : (
-            <></>
-          )}
+            <div className="synopsis">
+              <h3 className="title"> Synopsis </h3>
+              <p className="synopsis">{anime.synopsis}</p>
+            </div>
+            <div className="more-info">
+              <h3 className="title"> More Information </h3>
+              <p className="box details--box">{`Rating: ${anime.rating ? anime.rating : 'Not Specified'}`}</p>
+              <p className="box details--box">{`Score: ${anime.score}`}</p>
+              <p className="box details--box">{`Season: ${anime.season ? anime.season : 'Not Specified'}`}</p>
+            </div>
+            <div className="producers">
+              <h3 className="title"> Producers </h3>
+              <ul className="row genres">
+                {anime.producers.map((producer) => (
+                  <li key={nanoid()} className="box">{producer.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="studios">
+              <h3 className="title"> Studios </h3>
+              <ul className="row genres">
+                {anime.studios.map((studio) => (
+                  <li key={nanoid()} className="box">{studio.name}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-      );
-}
+      ) : <LoadingPage />
+      )
+    );
+};
 
 export default AnimeDetail;
