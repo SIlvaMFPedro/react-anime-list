@@ -14,7 +14,8 @@ const getFilteredAnime = async (filter) => {
     const info = await response.json();
     // Return filtered anime data
     return info.data;
-}
+};
+
 const getAnimeById = async (id) => {
     const baseURL = `https://api.jikan.moe/v4/anime/${id}`;
     const response = await fetch(baseURL);
@@ -23,6 +24,17 @@ const getAnimeById = async (id) => {
     return info.data;
 };
 
-export { getFilteredAnime, getAnimeById };
+const getAnimeCharactersById = async (id) => {
+    const baseURL = `https://api.jikan.moe/v4/anime/${id}/characters`;
+    const response = await fetch(baseURL);
+    const info = await response.json();
+    // Sort characters by favoritism
+    let sortedData = info?.data.sort((a, b) => a.favorites < b.favorites ? 1 : -1);
+    const sortedCharacters = sortedData?.slice(0, 10);
+    // Return anime characters data
+    return sortedCharacters;
+}
+
+export { getFilteredAnime, getAnimeById, getAnimeCharactersById };
 
 export default getAnime;
