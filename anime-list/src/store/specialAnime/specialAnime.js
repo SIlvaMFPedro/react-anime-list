@@ -1,7 +1,7 @@
 import generateReducer from '../utils/reducerGenerator';
 
-const { fetchAnime: fetchSpecialAnime, filterAnime: filterAnimeSpecial, reducer } = generateReducer('specialAnime', 'special');
+const { fetchAnime: fetchSpecialAnime, filterAnime: filterAnimeSpecial, sortAnime: sortAnimeSpecial, reducer } = generateReducer('specialAnime', 'special');
 
-export { fetchSpecialAnime, filterAnimeSpecial };
+export { fetchSpecialAnime, filterAnimeSpecial, sortAnimeSpecial };
 
 export default reducer;

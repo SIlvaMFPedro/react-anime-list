@@ -35,6 +35,14 @@ const getAnimeCharactersById = async (id) => {
     return sortedCharacters;
 }
 
-export { getFilteredAnime, getAnimeById, getAnimeCharactersById };
+const searchAnime = async (query) => {
+    const baseURL = `https://api.jikan.moe/v4/anime?q=${query}&order_by=popularity&sort=asc&sfw`;
+    const response = await fetch(baseURL);
+    const info = await response.json();
+    // Return search data
+    return info.data;
+}
+
+export { getFilteredAnime, getAnimeById, getAnimeCharactersById, searchAnime};
 
 export default getAnime;

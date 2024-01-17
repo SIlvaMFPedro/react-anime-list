@@ -6,7 +6,7 @@ const CHANGE_PAGE = 'anime-list/filtering/CHANGE_PAGE';
 // Set initial page state details
 const initialState = {
     category: 'All',
-    filter: 'Top',
+    filter: 'All',
     type: 'tvAnime',
     currentPage: 'Home page',
 };

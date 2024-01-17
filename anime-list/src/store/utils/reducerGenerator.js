@@ -19,6 +19,8 @@ const generateReducer = (name, type) => {
 
     const filterAnime = createAction(`${name}/filterAnime`);
 
+    const sortAnime = createAction(`${name}/sortAnime`);
+
     const reducer = createReducer(initialState, (builder) => {
         builder.addCase(fetchAnime.fulfilled, (state, action) => ({
             data: action.payload,
@@ -38,9 +40,30 @@ const generateReducer = (name, type) => {
                 return false;
             }),
         }));
+        builder.addCase(sortAnime, (state, action) => ({
+            ...state,
+            filteredData: action.payload === 'All' ? state.data : ( () => {
+                const sortByKey = key => (a, b) => a[key] > b[key] ? 1 : -1;
+                if (action.payload === 'Popular') {
+                    return state.data.slice().sort(sortByKey('popularity'));
+                }
+                else if (action.payload === 'Favorite'){
+                    return state.data.slice().sort(sortByKey('favorites'));
+                }
+                else if (action.payload === 'Score'){
+                    return state.data.slice().sort(sortByKey('score'));
+                }
+                else if (action.payload === 'Episodes'){
+                    return state.data.slice().sort(sortByKey('episodes'));
+                }
+                else {
+                    return state.data;
+                }
+            }),
+        }));
     });
 
-    return { filterAnime, fetchAnime, reducer };
+    return { sortAnime, filterAnime, fetchAnime, reducer };
 };
 
 export default generateReducer;

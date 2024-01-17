@@ -1,18 +1,34 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+// Import fetching, filtering and sorting actions
+import { fetchMovieAnime, filterAnimeMovie, sortAnimeMovie } from "../../store/movieAnime/movieAnime";
+import { fetchMusicAnime, filterAnimeMusic, sortAnimeMusic } from "../../store/musicAnime/musicAnime";
+import { fetchOnaAnime, filterAnimeOna, sortAnimeOna } from "../../store/onaAnime/onaAnime";
+import { fetchOvaAnime, filterAnimeOva, sortAnimeOva } from "../../store/ovaAnime/ovaAnime";
+import { fetchSpecialAnime, filterAnimeSpecial, sortAnimeSpecial} from "../../store/specialAnime/specialAnime";
+import { fetchTvAnime, filterAnimeTv, sortAnimeTv} from "../../store/tvAnime/tvAnime";
+import { changePage } from "../../store/pageDetails/pageDetails";
+import { searchAnime } from "../../store/utils/apiHandling";
 import Header from "../Header/Header";
+import LoadingPage from "../LoadingPage/LoadingPage";
 import MainContent from "../MainContent/MainContent";
 import Sidebar from "../Sidebar/Sidebar";
 import './Home.css';
 
 function Home() {
+    const dispatch = useDispatch();
+    const { type, category, filter } = useSelector((state) => state.pageDetails);
+    const { status, filteredData } = useSelector((state) => state[type]);
+    
     // Setup app state variables
     const [animeList, setAnimeList] = useState([]);
-    const [topAnime, setTopAnime] = useState([]);
-    const [popularAnime, setPopularAnime] = useState([]);
+    //const [topAnime, setTopAnime] = useState([]);
+    //const [popularAnime, setPopularAnime] = useState([]);
     const [search, setSearch] = useState("");
 
 
     // Setup JIKAN API calls
+    /**
     const getTopAnime = async () => {
         try{
             const top = await fetch(`https://api.jikan.moe/v4/top/anime?filter=airing`).then((res) => res.json());
@@ -24,8 +40,6 @@ function Home() {
         catch (error){
             console.log(error);
         }
-        
-
     };
 
     const getPopularAnime = async () => {
@@ -63,14 +77,26 @@ function Home() {
         }
 
     };
+    */
+
+    async function searchAnimeHandler(query) {
+        try{
+            const result = await searchAnime(query);
+            setAnimeList(result.data);
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 
     // Setup event listener handlers
     const handleSearch = (event) => {
         event.preventDefault();
-        fetchAnime(search);
+        searchAnimeHandler(search);
         
     };
 
+    /** 
     const handleFilter = (value) => {
         getFilteredAnime(value);
     };
@@ -84,13 +110,107 @@ function Home() {
         setTimeout(() => {getPopularAnime();}, 3000);
 
     }, []);
+    */
+
+    useEffect(() => {
+        dispatch(changePage('Home page'));
+
+        async function handleChanges(){
+            switch(type) {
+                case 'movieAnime': {
+                    if (status === 'iddle'){
+                        await dispatch(fetchMovieAnime());
+                    }
+                    dispatch(filterAnimeMovie(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeMovie(filter));
+                    }
+                    break;
+                }
+                case 'musicAnime': {
+                    if (status === 'iddle'){
+                        await dispatch(fetchMusicAnime());
+                    }
+                    dispatch(filterAnimeMusic(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeMusic(filter));
+                    }
+                    break;
+                }
+                case 'onaAnime': {
+                    if (status === 'iddle'){
+                        await dispatch(fetchOnaAnime());
+                    }
+                    dispatch(filterAnimeOna(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeOna(filter));
+                    }
+                    break;
+                }
+                case 'ovaAnime': {
+                    if (status === 'iddle'){
+                        await dispatch(fetchOvaAnime());
+                    }
+                    dispatch(filterAnimeOva(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeOva(filter));
+                    }
+                    break;
+                }
+                case 'specialAnime': {
+                    if (status === 'iddle'){
+                        await dispatch(fetchSpecialAnime());
+                    }
+                    dispatch(filterAnimeSpecial(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeSpecial(filter));
+                    }
+                    break;
+                }
+                case 'tvAnime': {
+                    if (status === 'iddle'){
+                        await dispatch(fetchTvAnime());
+                    }
+                    dispatch(filterAnimeTv(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeTv(filter));
+                    }
+                    break;
+                }
+                default: {
+                    if (status === 'iddle'){
+                        await dispatch(fetchTvAnime());
+                    }
+                    dispatch(filterAnimeTv(category));
+                    if (status === 'completed'){
+                        dispatch(sortAnimeTv(filter));
+                    }
+                }
+            }
+        }
+        handleChanges();
+    }, [type, category, filter, dispatch, status]);
+
+    useEffect(() => {
+        setAnimeList(filteredData);
+    }, [filteredData]);
 
     return (
         <div className="App">
             <Header />
             <div className="content--wrap">
-                <Sidebar topAnime={topAnime} popularAnime={popularAnime}/>
-                <MainContent handleSearch={handleSearch} handleFilter={handleFilter} search={search} setSearch={setSearch} animeList={animeList}/>
+                { status === 'completed' ? (
+                    <>
+                        <div className="container--info">
+                            <img className="silhouette" src="" alt= ""/>
+                            <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
+                            <p>{`Category: ${category}`}</p>
+                            <p>{`Order: ${filter}`}</p>
+                            <p>{`Results: ${filteredData.length}`}</p>
+                        </div>
+                        <MainContent handleSearch={handleSearch} search={search} setSearch={setSearch} animeList={animeList}/>
+                    </>
+                ) : <LoadingPage/>}
             </div>
         </div>
     );

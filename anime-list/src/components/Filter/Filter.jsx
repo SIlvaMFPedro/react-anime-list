@@ -20,10 +20,11 @@ const Filter = (props) => {
         <label htmlFor="filter">
             <p>{label}</p>
             <select onChange={onChangeHandlerFilter} name="filter" id="filter" value={filter}>
+                <option value="All">All</option>
                 <option value="Popular">Popular</option>
-                <option value="Upcoming">Upcoming</option>
                 <option value="Favorite">Favorite</option>
-                <option value="Airing">Airing</option>
+                <option value="Score">Score</option>
+                <option value="Episodes">Episodes</option>
             </select>
         </label>
     );

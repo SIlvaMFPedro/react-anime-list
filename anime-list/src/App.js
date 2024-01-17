@@ -8,7 +8,7 @@ function App(){
       <>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/anime/:category" element={<AnimeDetail/>}/>
+          <Route exact path="details/:title/:id" element={<AnimeDetail/>}/>
         </Routes>
       </>
     </HashRouter>

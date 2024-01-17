@@ -1,62 +1,36 @@
 import React from "react";
 import AnimeCard from "../AnimeCard/AnimeCard";
-import Filter from "../Filter/Filter";
+import NoResults from "../NoResults/NoResults";
 import './MainContent.css';
-import { Button, Menu, Fade } from "@mui/material";
-import { Favorite as FavoriteIcon } from "@mui/icons-material";
-import { Star as StarIcon } from "@mui/icons-material";
-import { LiveTv as LiveTvIcon } from "@mui/icons-material";
-import { CalendarMonth as CalendarMonthIcon } from "@mui/icons-material";
-import { nanoid } from "nanoid";
+
 
 function MainContent(props){
-    const [state, setState] = React.useState(null);
-
-    const open = Boolean(state);
-
-    const handleClick = (event) => {
-        setState(event.currentTarget);
-    }
-    const handleClose = (event) => {
-        setState(null);
-    }
-
-    const fetchFilter = (name) => {
-        props.handleFilter(name);
-    }
-
-    const filters = [
-        {name: "popular", query: "bypopularity", id: nanoid(), icon: <FavoriteIcon/>},
-        {name: "upcoming", query: "upcoming", id: nanoid(), icon: <CalendarMonthIcon/>},
-        {name: "favorite", query: "favorite", id: nanoid(), icon: <StarIcon/>},
-        {name: "airing", query: "airing", id:nanoid(), icon: <LiveTvIcon/>},
-    ];
-
+   
     return (
         <main>
             <div className="main--head">
                 <form className="search--box" onSubmit={props.handleSearch}>
-                    <Button className="filter--anime" id="fade-button" 
-                            aria-controls={open ? "fade--menu": undefined} aria-haspopup="true" aria-expanded={open ? "true": undefined} 
-                            onClick={handleClick} variant="contained">
-                            Filter Anime
-                    </Button>
-                    <Menu id="fade-menu" MenuListProps={{"aria-labelledby": "fade-button"}} anchorEl={state} open={open} onClose={handleClose} TransitionComponent={Fade}>
-                        {filters.map((filter) => {
-                            return (
-                                <Filter key={filter.id} fetchFilter={fetchFilter} filter={filter} handleClose={handleClose}/>
-                            );
-                        })}
-                    </Menu>
                     <input type="search" placeholder="Search for an anime" required value={props.search} onChange={(e) => props.setSearch(e.target.value)}/>
                 </form>
             </div>
-            <div className="anime--list">
-                {props && 
-                    props.animeList?.map((anime) => (
-                        <AnimeCard anime={anime} key={anime.mal_id}/>
-                    ))}
-            </div>
+            <ul className="anime--list">
+                {props && props.animeList.length > 0 ?
+                    props.animeList.map((anime) => (
+                        <li key={anime.mal_id} className="anime--card">
+                            <AnimeCard 
+                                id={anime.mal_id}
+                                imgUrl={anime.images.webp.large_image_url}
+                                title={anime.title}
+                                titleJapanese={anime.title_japanese}
+                                score={anime.score}
+                                year={anime.year}
+                                genres={anime.genres}
+                                type={anime.type}
+                            />
+                        </li>
+                    )) 
+                : <li><NoResults/></li>}
+            </ul>
         </main>
     );
 
