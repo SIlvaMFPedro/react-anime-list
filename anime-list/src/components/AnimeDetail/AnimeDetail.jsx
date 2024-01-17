@@ -65,9 +65,11 @@ function AnimeDetail(){
                   <li key={nanoid()} className="box genre-box">{genre.name}</li>
                 ))}
               </ul>
-              <a href={anime.url} target="_blank" rel="noreferrer">
-                <img src={imgUrl} height="28px" width="28px" alt="" title="View at MyAnimeList.net"/>
-              </a>
+              <div className="anime--icon">
+                <a href={anime.url} target="_blank" rel="noreferrer">
+                  <img src={imgUrl} className="my--anime--icon" alt="" title="View at MyAnimeList.net"/>
+                </a>
+              </div>
             </div>
           </div>
           <h3 className="title"> Trailer </h3>
@@ -88,7 +90,6 @@ function AnimeDetail(){
           <h3 className="title"> Characters </h3>
           {characters.length > 0 ? (
             <div className="character--section">
-              <h1 className="title">Characters</h1>
               <div className="character">
                 {characters.map((item) => {
                   return (

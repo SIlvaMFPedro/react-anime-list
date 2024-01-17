@@ -13,7 +13,8 @@ import Header from "../Header/Header";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import MainContent from "../MainContent/MainContent";
 import Sidebar from "../Sidebar/Sidebar";
-import './Home.css';
+// import './Home.css';
+import '../../styles/scss/Home.scss';
 
 import silhouette from '../../assets/images/silhouette.svg'
 
@@ -199,23 +200,20 @@ function Home() {
     }, [filteredData]);
 
     return (
-        <div className="App">
-            <Header />
-            <div className="content--wrap">
-                { status === 'completed' ? (
-                    <>
-                        <div className="container info">
-                            <img className="silhouette" src={silhouette} alt= ""/>
-                            <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
-                            <p>{`Category: ${category}`}</p>
-                            <p>{`Order: ${filter}`}</p>
-                            <p>{`Results: ${filteredData.length}`}</p>
-                        </div>
-                        <MainContent handleSearch={handleSearch} search={search} setSearch={setSearch} animeList={animeList}/>
-                    </>
-                ) : <LoadingPage/>}
-            </div>
-        </div>
+        <>
+            { status === 'completed' ? (
+                <>
+                    <div className="container info">
+                        <img className="silhouette" src={silhouette} alt= ""/>
+                        <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
+                        <p>{`Category: ${category}`}</p>
+                        <p>{`Order: ${filter}`}</p>
+                        <p>{`Results: ${filteredData.length}`}</p>
+                    </div>
+                    <MainContent handleSearch={handleSearch} search={search} setSearch={setSearch} animeList={animeList}/>
+                </>
+            ) : <LoadingPage/>}
+        </>
     );
 }
 

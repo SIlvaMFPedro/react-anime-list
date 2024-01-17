@@ -27,7 +27,7 @@ function Header() {
             <Link to="/">
                 <IoIosArrowBack fill="#fff"/>
             </Link>
-            <img src={imgUrl} height="28px" width="28px" alt="" title="View at MyAnimeList.net"/>
+            
             <h1>{currentPage}</h1>
             { width < 1024 ? (
                 <div>

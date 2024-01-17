@@ -99,6 +99,23 @@
   }
 }
 
+.anime--icon {
+  a {
+    font-size: 2.5rem;
+  }
+
+  img {
+    width: 28px;
+    height: 28px;
+  }
+
+  > * {
+    padding: 2px 0;
+    align-items: center;
+  }
+}
+
+
 .genres {
   gap: 10px;
   justify-content: center;

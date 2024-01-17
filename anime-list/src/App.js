@@ -1,18 +1,23 @@
-import { Routes, Route, HashRouter } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
+import Header from "./components/Header/Header";
 import AnimeDetail from "./components/AnimeDetail/AnimeDetail";
 
 function App(){
   return (
-    <HashRouter>
-      <>
+    <div className="App">
+      <header>
+        <Header/>
+      </header>
+      <main>
         <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route exact path="details/:title/:id" element={<AnimeDetail/>}/>
+        <Route path="/" element={<Home/>} />
+        <Route path="details/:title/:id" element={<AnimeDetail/>} />
         </Routes>
-      </>
-    </HashRouter>
-  )
+      </main>
+    </div>
+  );
 }
 
 export default App;
