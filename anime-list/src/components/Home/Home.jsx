@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // Import fetching, filtering and sorting actions
-import { fetchMovieAnime, filterAnimeMovie, sortAnimeMovie } from "../../store/movieAnime/movieAnime";
-import { fetchMusicAnime, filterAnimeMusic, sortAnimeMusic } from "../../store/musicAnime/musicAnime";
-import { fetchOnaAnime, filterAnimeOna, sortAnimeOna } from "../../store/onaAnime/onaAnime";
-import { fetchOvaAnime, filterAnimeOva, sortAnimeOva } from "../../store/ovaAnime/ovaAnime";
-import { fetchSpecialAnime, filterAnimeSpecial, sortAnimeSpecial} from "../../store/specialAnime/specialAnime";
-import { fetchTvAnime, filterAnimeTv, sortAnimeTv} from "../../store/tvAnime/tvAnime";
+import { fetchMovieAnime, filterAnimeMovie } from "../../store/movieAnime/movieAnime";
+import { fetchMusicAnime, filterAnimeMusic } from "../../store/musicAnime/musicAnime";
+import { fetchOnaAnime, filterAnimeOna } from "../../store/onaAnime/onaAnime";
+import { fetchOvaAnime, filterAnimeOva } from "../../store/ovaAnime/ovaAnime";
+import { fetchSpecialAnime, filterAnimeSpecial } from "../../store/specialAnime/specialAnime";
+import { fetchTvAnime, filterAnimeTv } from "../../store/tvAnime/tvAnime";
 import { changePage } from "../../store/pageDetails/pageDetails";
 import { searchAnime } from "../../store/utils/apiHandling";
 import Header from "../Header/Header";
@@ -126,9 +126,11 @@ function Home() {
                         await dispatch(fetchMovieAnime());
                     }
                     dispatch(filterAnimeMovie(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeMovie(filter));
                     }
+                    */
                     break;
                 }
                 case 'musicAnime': {
@@ -136,9 +138,11 @@ function Home() {
                         await dispatch(fetchMusicAnime());
                     }
                     dispatch(filterAnimeMusic(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeMusic(filter));
                     }
+                    */
                     break;
                 }
                 case 'onaAnime': {
@@ -146,9 +150,11 @@ function Home() {
                         await dispatch(fetchOnaAnime());
                     }
                     dispatch(filterAnimeOna(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeOna(filter));
                     }
+                    */
                     break;
                 }
                 case 'ovaAnime': {
@@ -156,9 +162,11 @@ function Home() {
                         await dispatch(fetchOvaAnime());
                     }
                     dispatch(filterAnimeOva(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeOva(filter));
                     }
+                    */
                     break;
                 }
                 case 'specialAnime': {
@@ -166,9 +174,11 @@ function Home() {
                         await dispatch(fetchSpecialAnime());
                     }
                     dispatch(filterAnimeSpecial(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeSpecial(filter));
                     }
+                    */
                     break;
                 }
                 case 'tvAnime': {
@@ -176,9 +186,11 @@ function Home() {
                         await dispatch(fetchTvAnime());
                     }
                     dispatch(filterAnimeTv(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeTv(filter));
                     }
+                    */
                     break;
                 }
                 default: {
@@ -186,9 +198,11 @@ function Home() {
                         await dispatch(fetchTvAnime());
                     }
                     dispatch(filterAnimeTv(category));
+                    /*
                     if (status === 'completed'){
                         dispatch(sortAnimeTv(filter));
                     }
+                    */
                 }
             }
         }
@@ -198,6 +212,29 @@ function Home() {
     useEffect(() => {
         setAnimeList(filteredData);
     }, [filteredData]);
+
+    useEffect(() => {
+
+        async function sortAnimeData(filter) {
+            const sortTypes = {
+                Popular: 'popularity',
+                Favorite: 'favorites',
+                Score: 'score',
+                Episodes: 'episodes'
+            }
+
+            const sortProperty = sortTypes[filter];
+            if (status === 'completed'){
+                const sortedAnimeData = [...filteredData].sort((a, b) => a[sortProperty] - b[sortProperty])
+                setAnimeList(sortedAnimeData);
+            }
+            console.log(sortProperty);
+        }
+
+        // console.log(filter);
+        sortAnimeData(filter);
+
+    }, [filter, status, filteredData])
 
     return (
         <>
