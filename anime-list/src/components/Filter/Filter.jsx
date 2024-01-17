@@ -8,11 +8,10 @@ import './Filter.css';
 const Filter = (props) => {
     const dispatch = useDispatch();
     const { filter } = useSelector((state) => state.pageDetails);
-    const { setMenu, label } = props;
+    const { label } = props;
 
     const onChangeHandlerFilter = (event) => {
         dispatch(changeFilter(event.target.value));
-        setMenu(false);
     }
 
 

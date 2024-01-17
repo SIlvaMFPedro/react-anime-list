@@ -7,7 +7,7 @@ const HeaderSelect = () => {
     <form className="header--select">
         <Type setMenu={() => null} label="Type: "/>
         <Category label="Category: "/>
-        <Filter label="Filter: "/>
+        <Filter label="Order: "/>
     </form>
 };
 
