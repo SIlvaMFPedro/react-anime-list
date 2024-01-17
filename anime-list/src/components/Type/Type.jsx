@@ -16,7 +16,7 @@ const Type = (props) => {
     return (
         <label htmlFor="type">
             <p>{label}</p>
-            <select onChange={onChangeHandlerType} name="type" id="type" value={type}>
+            <select onChange={onChangeHandlerType} name="type" id="type" value={type} data-testid="typeSelect">
                 <option value="tvAnime">Tv</option>
                 <option value="movieAnime">Movie</option>
                 <option value="ovaAnime">Ova</option>

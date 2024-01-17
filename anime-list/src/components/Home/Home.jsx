@@ -15,6 +15,8 @@ import MainContent from "../MainContent/MainContent";
 import Sidebar from "../Sidebar/Sidebar";
 import './Home.css';
 
+import silhouette from '../../assets/images/silhouette.svg'
+
 function Home() {
     const dispatch = useDispatch();
     const { type, category, filter } = useSelector((state) => state.pageDetails);
@@ -82,7 +84,8 @@ function Home() {
     async function searchAnimeHandler(query) {
         try{
             const result = await searchAnime(query);
-            setAnimeList(result.data);
+            
+            setAnimeList(result);
         }
         catch(error){
             console.log(error);
@@ -202,7 +205,7 @@ function Home() {
                 { status === 'completed' ? (
                     <>
                         <div className="container info">
-                            <img className="silhouette" src="" alt= ""/>
+                            <img className="silhouette" src={silhouette} alt= ""/>
                             <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
                             <p>{`Category: ${category}`}</p>
                             <p>{`Order: ${filter}`}</p>

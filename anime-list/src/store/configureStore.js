@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import { reducer as movieAnimeReducer } from './movieAnime/movieAnime';
-import { reducer as musicAnimeReducer } from './musicAnime/musicAnime';
-import { reducer as onaAnimeReducer } from './onaAnime/onaAnime';
-import { reducer as ovaAnimeReducer } from './ovaAnime/ovaAnime';
-import { reducer as specialAnimeReducer } from './specialAnime/specialAnime';
-import { reducer as tvAnimeReducer } from './tvAnime/tvAnime';
-import { reducer as pageDetailsReducer } from './pageDetails/pageDetails';
+import movieAnimeReducer from './movieAnime/movieAnime';
+import musicAnimeReducer from './musicAnime/musicAnime';
+import onaAnimeReducer  from './onaAnime/onaAnime';
+import ovaAnimeReducer  from './ovaAnime/ovaAnime';
+import specialAnimeReducer  from './specialAnime/specialAnime';
+import tvAnimeReducer  from './tvAnime/tvAnime';
+import pageDetailsReducer  from './pageDetails/pageDetails';
 
 
 

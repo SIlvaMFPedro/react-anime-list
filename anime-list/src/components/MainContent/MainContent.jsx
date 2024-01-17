@@ -5,6 +5,8 @@ import './MainContent.css';
 
 
 function MainContent(props){
+
+    // console.log(props);
    
     return (
         <main>
@@ -14,7 +16,7 @@ function MainContent(props){
                 </form>
             </div>
             <ul className="anime--list">
-                {props && props.animeList.length > 0 ?
+                {props ?
                     props.animeList.map((anime) => (
                         <li key={anime.mal_id} className="anime--card">
                             <AnimeCard 

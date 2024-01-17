@@ -36,12 +36,12 @@ function AnimeDetail(){
     useEffect(() => {
       async function fetchAnime(){
         const result = await getAnimeById(id);
-        setAnime(result.data);
+        setAnime(result);
       }
 
       async function fetchCharacters() {
         const result = await getAnimeCharactersById(id);
-        setCharacters(result.data);
+        setCharacters(result);
       }
 
       fetchAnime();
