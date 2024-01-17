@@ -201,7 +201,7 @@ function Home() {
             <div className="content--wrap">
                 { status === 'completed' ? (
                     <>
-                        <div className="container--info">
+                        <div className="container info">
                             <img className="silhouette" src="" alt= ""/>
                             <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
                             <p>{`Category: ${category}`}</p>

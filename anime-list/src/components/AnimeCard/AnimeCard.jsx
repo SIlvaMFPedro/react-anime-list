@@ -26,9 +26,9 @@ function AnimeCard(props){
                     {year && (<p className="box">{year}</p>)}
                 </div>
                 <ul className="row genres--container">
-                    {genres.map((genre) => {
+                    {genres.map((genre) => (
                         <li key={nanoid()} className="box genre">{genre.name}</li>
-                    })}
+                    ))}
                 </ul>
                 <p className="box score" data-testid="score">{score}</p>
             </div>

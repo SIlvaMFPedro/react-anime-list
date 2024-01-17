@@ -28,6 +28,7 @@ header h1 strong {
   display: flex;
 }
 
+
 .content--wrap aside {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 250px;
@@ -59,6 +60,38 @@ header h1 strong {
   text-decoration: none;
   -webkit-transition: 0.4s;
   transition: 0.4s;                                                                          
+}
+
+.content--wrap .container {
+  -webkit-box-flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #303f8f;
+  height: 40vh;
+}
+
+.content--wrap .info {
+  -webkit-box-flex: 1;
+  flex-direction: column;
+
+  p {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+    z-index: 2;
+    animation: slide-up 1s cubic-bezier(0.165, 0.84, 0.44, 1), fade-in 1s cubic-bezier(0.2, 0.6, 0.8, 1);
+  }
+}
+
+.content--wrap .silhouette {
+  -webkit-box-flex: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  height: 100%;
 }
 
 /*
@@ -139,26 +172,49 @@ header h1 strong {
 .content--wrap main .anime--list {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-top: 32px;
-  margin: 32px -0px 0px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  background-color: #1b1b1f;
+
+  @media screen and (max-width: 320px){
+    grid-template-columns: 1fr;
+  }
 }
 
 .content--wrap main .anime--list .anime--card {
   -webkit-box-flex: 1;
-  -ms-flex: 1 1 33.333%;
-  flex: 1 1 33.333%;
-  max-width: 33.333%;
-  padding: 16px 8px;
-
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 450px;
+  background-color: #5d3c55;
+  margin-bottom: 30px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 3px 6px 6px 1px #44273ed2;
+  border-radius: 20px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 2);
+  animation: slide-up 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), fade-in 1s cubic-bezier(0.2, 0.6, 0.8, 1);
 }
 
 .content--wrap main .anime--list .anime--card a {
   text-decoration: none;
 }
 
+.content--wrap main .anime--list .anime--card p,li,h3 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/*
 .content--wrap main .anime--list .anime--card figure {
   display: block;
   margin-bottom: 16px;
@@ -176,15 +232,73 @@ header h1 strong {
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
+*/
+
+.content--wrap .anime--list .anime--card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  z-index: -1;
+  border-radius: 20px;
+  animation: fade-in 1s cubic-bezier(0.2, 0.6, 0.8, 1);
+
+  @media screen and (max-width: 320px){
+    object-fit: cover;
+  }
+}
+
+.content--wrap .anime--list .anime--card .airing {
+  justify-content: space-between;
+
+}
+
+.content--wrap .anime--list .anime--card .airing .box {
+  background-color: #d0d2eb;
+  color: #2c2f42;
+  border-radius: 15px;
+  border: 1px solid #90909a;
+}
+
+.content--wrap .anime--list .anime--card .genres--container {
+  column-gap: 20px;
+}
+
+.content--wrap .anime--list .anime--card .details {
+  background-color: #1b1b1fd7;
+  padding: 10px;
+  box-shadow: 1px 3px 3px 3px;
+  animation: fade-in 2s cubic-bezier(0.2, 0.6, 0.8, 1);
+}
+
+.content--wrap .anime--list .anime--card .score {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 4rem;
+  background-color: #dde1ff;
+  box-shadow: 3px 3px 3px 1px;
+  color: #2c2f42;
+  border-radius: 10px 0 10px 10px;
+  animation: slide-in 1s cubic-bezier(0.2, 0.6, 0.8, 1), fade-in 1s cubic-bezier(0.2, 0.6, 0.8, 1);
+}
 
 .content--wrap main .anime--list .anime--card h3 {
   color: #313131;
 }
 
+/*
 .content--wrap main .anime--list .anime--card:hover figure img {
   -webkit-box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
   -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+*/
+
+.content--wrap .anime--list .anime--card:hover {
   transform: scale(1.05);
 }
 

@@ -7,7 +7,8 @@ import { changePage } from "../../store/pageDetails/pageDetails";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import { ArrowBackIos as ArrowBackIosIcon } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
-import './AnimeDetail.css';
+//import './AnimeDetail.css';
+import '../../styles/scss/AnimeDetail.scss';
 
 function AnimeDetail(){
 

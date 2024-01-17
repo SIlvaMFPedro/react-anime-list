@@ -7,7 +7,9 @@ import HeaderSelect from "../HeaderSelect/HeaderSelect";
 import useWindowDimensions from "../../utils/utils";
 
 import { SocialMedia } from "../SocialMedia/SocialMedia";
-import './Header.css';
+
+// import './Header.css';
+import '../../styles/scss/Header.scss';
 
 function Header() {
     const [menuActive, setMenuActive] = useState(false);
