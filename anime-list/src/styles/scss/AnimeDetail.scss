@@ -53,6 +53,21 @@
     padding: 2px 2px;
 }
 
+.character--description {
+  text-align: center;
+}
+
+.character--photo {
+  width: 100%;
+  border-radius: 9px;
+  align-self: center;
+}
+
+.character--name {
+  color:white;
+  text-align: center;
+}
+
 .trailer--section {
     min-height: 100%;
     min-width: 100%;
@@ -185,7 +200,9 @@ iframe {
 .anime--info {
   display: flex;
   flex-direction: column;
+
   align-items: center;
+  
 
   > * {
     margin: 20px 0;
@@ -193,7 +210,7 @@ iframe {
 
   @include for--laptop {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
 
     .anime-description {
       margin-left: 30px;

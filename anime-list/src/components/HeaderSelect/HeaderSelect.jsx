@@ -3,12 +3,16 @@ import Category from "../Category/Category";
 import Filter from "../Filter/Filter";
 import Type from "../Type/Type";
 
-const HeaderSelect = () => {
-    <form className="header--select">
-        <Type setMenu={() => null} label="Type: "/>
-        <Category label="Category: "/>
-        <Filter label="Order: "/>
-    </form>
+function HeaderSelect(){
+
+    return (
+        <form className="header--select">
+            <Type setMenu={() => null} label="Type: "/>
+            <Category label="Category: "/>
+            <Filter label="Order: "/>
+        </form>
+    );
+    
 };
 
 export default HeaderSelect;

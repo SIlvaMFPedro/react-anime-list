@@ -151,10 +151,19 @@ h2 {
     height: 40vh;
   }
   
-  .silhouette {
+  .firstSilhouette {
     position: absolute;
     right: 0;
     top: 0;
     z-index: 1;
     height: 100%;
+  }
+
+  .secondSilhouette{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+    transform: rotateY(180deg);
   }

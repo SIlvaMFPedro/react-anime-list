@@ -27,15 +27,17 @@ function Header() {
             <Link to="/">
                 <IoIosArrowBack fill="#fff"/>
             </Link>
-            
-            <h1>{currentPage}</h1>
+            <div class="header">
+                <img src={imgUrl} alt="logo"/>
+                <h1>{currentPage}</h1>
+            </div>
             { width < 1024 ? (
                 <div>
                     <button onClick={clickHandler} type="button" data-testid="settings">
                         <IoMdSettings fill="#fff"/>
                     </button>
                 </div>
-            ) : <HeaderSelect />}
+            ) : <HeaderSelect/>}
             { (menuActive && width < 1024) && <MenuSettings setMenu={setMenuActive}/>}
         </nav>
     );

@@ -16,7 +16,7 @@ import Sidebar from "../Sidebar/Sidebar";
 // import './Home.css';
 import '../../styles/scss/Home.scss';
 
-import silhouette from '../../assets/images/silhouette.svg'
+import silhouette from '../../assets/images/silhouette.svg';
 
 function Home() {
     const dispatch = useDispatch();
@@ -126,11 +126,6 @@ function Home() {
                         await dispatch(fetchMovieAnime());
                     }
                     dispatch(filterAnimeMovie(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeMovie(filter));
-                    }
-                    */
                     break;
                 }
                 case 'musicAnime': {
@@ -138,11 +133,6 @@ function Home() {
                         await dispatch(fetchMusicAnime());
                     }
                     dispatch(filterAnimeMusic(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeMusic(filter));
-                    }
-                    */
                     break;
                 }
                 case 'onaAnime': {
@@ -150,11 +140,6 @@ function Home() {
                         await dispatch(fetchOnaAnime());
                     }
                     dispatch(filterAnimeOna(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeOna(filter));
-                    }
-                    */
                     break;
                 }
                 case 'ovaAnime': {
@@ -162,11 +147,6 @@ function Home() {
                         await dispatch(fetchOvaAnime());
                     }
                     dispatch(filterAnimeOva(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeOva(filter));
-                    }
-                    */
                     break;
                 }
                 case 'specialAnime': {
@@ -174,11 +154,6 @@ function Home() {
                         await dispatch(fetchSpecialAnime());
                     }
                     dispatch(filterAnimeSpecial(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeSpecial(filter));
-                    }
-                    */
                     break;
                 }
                 case 'tvAnime': {
@@ -186,11 +161,6 @@ function Home() {
                         await dispatch(fetchTvAnime());
                     }
                     dispatch(filterAnimeTv(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeTv(filter));
-                    }
-                    */
                     break;
                 }
                 default: {
@@ -198,11 +168,6 @@ function Home() {
                         await dispatch(fetchTvAnime());
                     }
                     dispatch(filterAnimeTv(category));
-                    /*
-                    if (status === 'completed'){
-                        dispatch(sortAnimeTv(filter));
-                    }
-                    */
                 }
             }
         }
@@ -241,11 +206,12 @@ function Home() {
             { status === 'completed' ? (
                 <>
                     <div className="container info">
-                        <img className="silhouette" src={silhouette} alt= ""/>
+                        <img className="firstSilhouette" src={silhouette} alt= ""/>
                         <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
                         <p>{`Category: ${category}`}</p>
                         <p>{`Order: ${filter}`}</p>
                         <p>{`Results: ${filteredData.length}`}</p>
+                        <img className="secondSilhouette" src={silhouette} alt= "" />
                     </div>
                     <MainContent handleSearch={handleSearch} search={search} setSearch={setSearch} animeList={animeList}/>
                 </>
