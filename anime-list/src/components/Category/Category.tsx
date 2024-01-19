@@ -5,7 +5,8 @@ import { changeCategory } from '../../store/pageDetails/pageDetails';
 
 const Category = (props: $TSFixMe) => {
     const dispatch = useDispatch();
-    // @ts-expect-error TS(2571): Object is of type 'unknown'.
+
+    // @ts-expect-error TS(2571) FIXME: Object is of type 'unknown'.
     const { category } = useSelector((state) => state.pageDetails);
     const { label } = props;
 

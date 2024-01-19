@@ -5,7 +5,8 @@ import { changeType } from "../../store/pageDetails/pageDetails";
 
 const Type = (props: $TSFixMe) => {
     const dispatch = useDispatch();
-    // @ts-expect-error TS(2571): Object is of type 'unknown'.
+
+    // @ts-expect-error TS(2571) FIXME: Object is of type 'unknown'.
     const { type } = useSelector((state) => state.pageDetails);
     const { setMenu, label } = props;
 

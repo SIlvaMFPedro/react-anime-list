@@ -21,7 +21,8 @@ function MainContent(props: $TSFixMe){
                         id={anime.mal_id}
                         imgUrl={anime.images.webp.large_image_url}
                         title={anime.title}
-                        // @ts-expect-error TS(2322): Type '{ id: any; imgUrl: any; title: any; titleJap... Remove this comment to see the full error message
+
+                        // @ts-expect-error TS(2322) FIXME: Type '{ id: any; imgUrl: any; title: any; titleJap... Remove this comment to see the full error message
                         titleJapanese={anime.title_japanese}
                         score={anime.score}
                         year={anime.year}
@@ -29,7 +30,8 @@ function MainContent(props: $TSFixMe){
                         type={anime.type}
                     />
                 </li>) 
-            // @ts-expect-error TS(2786): 'NoResults' cannot be used as a JSX component.
+
+            // @ts-expect-error TS(2786) FIXME: 'NoResults' cannot be used as a JSX component.
             : <li><NoResults/></li>}
         </ul>  
     </>;

@@ -22,7 +22,8 @@ const generateReducer = (name: $TSFixMe, type: $TSFixMe) => {
     
 
     const reducer = createReducer(initialState, (builder) => {
-        // @ts-expect-error TS(2769): No overload matches this call.
+
+        // @ts-expect-error TS(2769) FIXME: No overload matches this call.
         builder.addCase(fetchAnime.fulfilled, (state, action) => ({
             data: action.payload,
             filteredData: action.payload,
@@ -32,9 +33,11 @@ const generateReducer = (name: $TSFixMe, type: $TSFixMe) => {
             ...state,
             filteredData: action.payload === 'All' ? state.data: state.data.filter((anime) => {
                 // Filter data based on anime genre
-                // @ts-expect-error TS(2339): Property 'genres' does not exist on type 'never'.
+
+                // @ts-expect-error TS(2339) FIXME: Property 'genres' does not exist on type 'never'.
                 for (let i = 0; i < anime.genres.length; i += 1){
-                    // @ts-expect-error TS(2339): Property 'genres' does not exist on type 'never'.
+
+                    // @ts-expect-error TS(2339) FIXME: Property 'genres' does not exist on type 'never'.
                     const genre = anime.genres[i];
                     if (genre.name === action.payload){
                         return true;

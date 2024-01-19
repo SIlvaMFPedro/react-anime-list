@@ -13,11 +13,13 @@ import '../../styles/scss/Header.scss';
 
 function Header() {
     const [menuActive, setMenuActive] = useState(false);
-    // @ts-expect-error TS(2571): Object is of type 'unknown'.
+
+    // @ts-expect-error TS(2571) FIXME: Object is of type 'unknown'.
     const { currentPage } = useSelector((state) => state.pageDetails);
     const { width } = useWindowDimensions();
 
-    // @ts-expect-error TS(2580): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
+
+    // @ts-expect-error TS(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     const imgUrl = require(`../../assets/images/MAL-icon.png`);
     
     const clickHandler = () => {
@@ -29,7 +31,9 @@ function Header() {
             <Link to="/">
                 <IoIosArrowBack fill="#fff"/>
             </Link>
+            // @ts-expect-error TS(2304) FIXME: Cannot find name 'children'.
             // @ts-expect-error TS(2322): Type '{ children: Element[]; class: string; }' is ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2322) FIXME: Type '{ children: Element[]; class: string; }' is ... Remove this comment to see the full error message
             <div class="header">
                 <img src={imgUrl} alt="logo"/>
                 <h1>{currentPage}</h1>

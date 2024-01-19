@@ -44,7 +44,8 @@ AnimeCard.propTypes = {
     title: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     year: PropTypes.number,
-    // @ts-expect-error TS(2345): Argument of type 'StringConstructor' is not assign... Remove this comment to see the full error message
+
+    // @ts-expect-error TS(2345) FIXME: Argument of type 'StringConstructor' is not assign... Remove this comment to see the full error message
     genres: PropTypes.arrayOf(String).isRequired,
     type: PropTypes.string.isRequired,
 };

@@ -7,7 +7,8 @@ import './Filter.css';
 
 const Filter = (props: $TSFixMe) => {
     const dispatch = useDispatch();
-    // @ts-expect-error TS(2571): Object is of type 'unknown'.
+
+    // @ts-expect-error TS(2571) FIXME: Object is of type 'unknown'.
     const { filter } = useSelector((state) => state.pageDetails);
     const { label } = props;
 

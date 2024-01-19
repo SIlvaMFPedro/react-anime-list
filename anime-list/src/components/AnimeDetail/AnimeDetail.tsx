@@ -12,7 +12,8 @@ import '../../styles/scss/AnimeDetail.scss';
 
 function AnimeDetail(){
 
-    // @ts-expect-error TS(2580): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
+
+    // @ts-expect-error TS(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
     const imgUrl = require(`../../assets/images/MAL-icon.png`);
 
     const dispatch = useDispatch();
@@ -51,25 +52,31 @@ function AnimeDetail(){
       dispatch(changePage(title));
     }, [dispatch, id, title]);
 
-    // @ts-expect-error TS(2339): Property 'title' does not exist on type '{}'.
+
+    // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
     return anime.title ? (
         <div className="anime--details">
           <div className="anime--info">
             <div className="image--container">
               // @ts-expect-error TS(2339): Property 'images' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'images' does not exist on type '{}'.
               <img src={anime.images.webp.large_image_url} alt={anime.title} />
             </div>
             <div className="anime--description">
               // @ts-expect-error TS(2339): Property 'title' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
               <h2>{anime.title}</h2>
               // @ts-expect-error TS(2339): Property 'title_japanese' does not exist on type '... Remove this comment to see the full error message
+              // @ts-expect-error TS(2339) FIXME: Property 'title_japanese' does not exist on type '... Remove this comment to see the full error message
               <h3>{anime.title_japanese}</h3>
               <ul className="row genres">
                 // @ts-expect-error TS(2339): Property 'genres' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'genres' does not exist on type '{}'.
                 {anime.genres.map((genre: $TSFixMe) => <li key={nanoid()} className="box genre-box">{genre.name}</li>)}
               </ul>
               <div className="anime--icon">
                 // @ts-expect-error TS(2339): Property 'url' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'url' does not exist on type '{}'.
                 <a href={anime.url} target="_blank" rel="noreferrer">
                   <img src={imgUrl} className="my--anime--icon" alt="" title="View at MyAnimeList.net"/>
                 </a>
@@ -78,15 +85,19 @@ function AnimeDetail(){
           </div>
           <h3 className="title"> Trailer </h3>
           // @ts-expect-error TS(2339): Property 'trailer' does not exist on type '{}'.
+          // @ts-expect-error TS(2339) FIXME: Property 'trailer' does not exist on type '{}'.
           {anime.trailer.embed_url ? (
             <div className="trailer--section">
+              // @ts-expect-error TS(2304) FIXME: Cannot find name 'children'.
               // @ts-expect-error TS(2322): Type '{ children: Element; align: string; }' is no... Remove this comment to see the full error message
+              // @ts-expect-error TS(2322) FIXME: Type '{ children: Element; align: string; }' is no... Remove this comment to see the full error message
               <div align="center">
                 <iframe
                   id="inLineFrameExample"
                   title="YouTube Video Player"
                   style={{width: 1000, height: 500, border:0}}
-                  // @ts-expect-error TS(2339): Property 'trailer' does not exist on type '{}'.
+
+                  // @ts-expect-error TS(2339) FIXME: Property 'trailer' does not exist on type '{}'.
                   src={anime.trailer.embed_url.replace('&autoplay=1', '')}
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -96,10 +107,12 @@ function AnimeDetail(){
           ) : <p>{'We couldn\'t find any link. Sorry :('}</p>}
           <h3 className="title"> Characters </h3>
           // @ts-expect-error TS(2339): Property 'length' does not exist on type '{}'.
+          // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type '{}'.
           {characters.length > 0 ? (
             <div className="character--section">
               <div className="character">
                 // @ts-expect-error TS(2339): Property 'map' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'map' does not exist on type '{}'.
                 {characters.map((item: $TSFixMe) => {
                   return (
                     <div className="character--item" key={item.character.mal_id}>
@@ -124,37 +137,46 @@ function AnimeDetail(){
               <h3 className="title"> Airing Information </h3>
               <p className="box details--box">
                 // @ts-expect-error TS(2339): Property 'year' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'year' does not exist on type '{}'.
                 {`Year: ${anime.year ? anime.year : 'Not Specified'}`}
               </p>
               <p className="box details--box">
                 // @ts-expect-error TS(2339): Property 'episodes' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'episodes' does not exist on type '{}'.
                 {`Episodes: ${anime.episodes ? anime.episodes : 'Not Specified'}`}
               </p>
               <p className="box details--box">
                 // @ts-expect-error TS(2339): Property 'duration' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'duration' does not exist on type '{}'.
                 {`Duration: ${anime.duration ? anime.duration : 'Not Specified'}`}
               </p>
               // @ts-expect-error TS(2339): Property 'status' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'status' does not exist on type '{}'.
               <p className="box details--box">{`Status: ${anime.status ? anime.status : 'Not Specified'}`}</p>
             </div>
             <div className="synopsis">
               <h3 className="title"> Synopsis </h3>
               // @ts-expect-error TS(2339): Property 'synopsis' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'synopsis' does not exist on type '{}'.
               <p className="synopsis">{anime.synopsis}</p>
             </div>
             <div className="more-info">
               <h3 className="title"> More Information </h3>
               // @ts-expect-error TS(2339): Property 'rating' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'rating' does not exist on type '{}'.
               <p className="box details--box">{`Rating: ${anime.rating ? anime.rating : 'Not Specified'}`}</p>
               // @ts-expect-error TS(2339): Property 'score' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'score' does not exist on type '{}'.
               <p className="box details--box">{`Score: ${anime.score}`}</p>
               // @ts-expect-error TS(2339): Property 'season' does not exist on type '{}'.
+              // @ts-expect-error TS(2339) FIXME: Property 'season' does not exist on type '{}'.
               <p className="box details--box">{`Season: ${anime.season ? anime.season : 'Not Specified'}`}</p>
             </div>
             <div className="producers">
               <h3 className="title"> Producers </h3>
               <ul className="row genres">
                 // @ts-expect-error TS(2339): Property 'producers' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'producers' does not exist on type '{}'.
                 {anime.producers.map((producer: $TSFixMe) => <li key={nanoid()} className="box">{producer.name}</li>)}
               </ul>
             </div>
@@ -162,12 +184,13 @@ function AnimeDetail(){
               <h3 className="title"> Studios </h3>
               <ul className="row genres">
                 // @ts-expect-error TS(2339): Property 'studios' does not exist on type '{}'.
+                // @ts-expect-error TS(2339) FIXME: Property 'studios' does not exist on type '{}'.
                 {anime.studios.map((studio: $TSFixMe) => <li key={nanoid()} className="box">{studio.name}</li>)}
               </ul>
             </div>
           </div>
         </div>
-      // @ts-expect-error TS(2786): 'LoadingPage' cannot be used as a JSX component.
+      // @ts-expect-error TS(2786) FIXME: 'LoadingPage' cannot be used as a JSX component.
       ) : <LoadingPage />;
 };
 
