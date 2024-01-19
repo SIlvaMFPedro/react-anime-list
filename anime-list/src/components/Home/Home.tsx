@@ -212,7 +212,7 @@ function Home() {
             // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const sortProperty = sortTypes[filter];
             if (status === 'completed'){
-                const sortedAnimeData = [...filteredData].sort((a, b) => a[sortProperty] - b[sortProperty])
+                const sortedAnimeData = [...filteredData].sort((a, b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
 
                 // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
                 setAnimeList(sortedAnimeData);
