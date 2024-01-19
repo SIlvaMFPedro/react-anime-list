@@ -48,6 +48,9 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "ts-migrate": "^0.1.35",
+    "ts-migrate-plugins": "^0.1.35",
+    "ts-migrate-server": "^0.1.33"
   }
 }
