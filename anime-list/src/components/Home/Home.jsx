@@ -190,7 +190,7 @@ function Home() {
 
             const sortProperty = sortTypes[filter];
             if (status === 'completed'){
-                const sortedAnimeData = [...filteredData].sort((a, b) => a[sortProperty] - b[sortProperty])
+                const sortedAnimeData = [...filteredData].sort((a, b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
                 setAnimeList(sortedAnimeData);
             }
             console.log(sortProperty);
