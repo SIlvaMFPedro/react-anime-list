@@ -5,12 +5,13 @@ import { changeFilter } from "../../store/pageDetails/pageDetails";
 
 import './Filter.css';
 
-const Filter = (props) => {
+const Filter = (props: $TSFixMe) => {
     const dispatch = useDispatch();
+    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     const { filter } = useSelector((state) => state.pageDetails);
     const { label } = props;
 
-    const onChangeHandlerFilter = (event) => {
+    const onChangeHandlerFilter = (event: $TSFixMe) => {
         dispatch(changeFilter(event.target.value));
     }
 

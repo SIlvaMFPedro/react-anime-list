@@ -1,4 +1,4 @@
-const getAnime = async (type) => {
+const getAnime = async (type: $TSFixMe) => {
     const baseURL = `https://api.jikan.moe/v4/anime?order_by=score&sort=desc&type=${type}`;
     const firstResponse = await fetch(`${baseURL}&page=1`);
     const firstInfo = await firstResponse.json();
@@ -8,7 +8,7 @@ const getAnime = async (type) => {
     return [...firstInfo.data, ...lateInfo.data];
 };
 
-const getFilteredAnime = async (filter) => {
+const getFilteredAnime = async (filter: $TSFixMe) => {
     const baseURL = `https://api.jikan.moe/v4/top/anime?filter=${filter}`;
     const response = await fetch(baseURL);
     const info = await response.json();
@@ -16,7 +16,7 @@ const getFilteredAnime = async (filter) => {
     return info.data;
 };
 
-const getAnimeById = async (id) => {
+const getAnimeById = async (id: $TSFixMe) => {
     const baseURL = `https://api.jikan.moe/v4/anime/${id}`;
     const response = await fetch(baseURL);
     const info = await response.json();
@@ -24,18 +24,18 @@ const getAnimeById = async (id) => {
     return info.data;
 };
 
-const getAnimeCharactersById = async (id) => {
+const getAnimeCharactersById = async (id: $TSFixMe) => {
     const baseURL = `https://api.jikan.moe/v4/anime/${id}/characters`;
     const response = await fetch(baseURL);
     const info = await response.json();
     // Sort characters by favoritism
-    let sortedData = info?.data.sort((a, b) => a.favorites < b.favorites ? 1 : -1);
+    let sortedData = info?.data.sort((a: $TSFixMe, b: $TSFixMe) => a.favorites < b.favorites ? 1 : -1);
     const sortedCharacters = sortedData?.slice(0, 10);
     // Return anime characters data
     return sortedCharacters;
 }
 
-const searchAnime = async (query) => {
+const searchAnime = async (query: $TSFixMe) => {
     const baseURL = `https://api.jikan.moe/v4/anime?q=${query}&order_by=popularity&sort=asc&sfw`;
     const response = await fetch(baseURL);
     const info = await response.json();

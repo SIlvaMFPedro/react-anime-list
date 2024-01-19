@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
 import './AnimeCard.css';
 
-function AnimeCard(props){
+function AnimeCard(props: $TSFixMe){
     const {
         id,
         imgUrl,
@@ -26,9 +26,7 @@ function AnimeCard(props){
                     {year && (<p className="box">{year}</p>)}
                 </div>
                 <ul className="row genres--container">
-                    {genres.map((genre) => (
-                        <li key={nanoid()} className="box genre">{genre.name}</li>
-                    ))}
+                    {genres.map((genre: $TSFixMe) => <li key={nanoid()} className="box genre">{genre.name}</li>)}
                 </ul>
                 <p className="box score" data-testid="score">{score}</p>
             </div>
@@ -46,6 +44,7 @@ AnimeCard.propTypes = {
     title: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
     year: PropTypes.number,
+    // @ts-expect-error TS(2345): Argument of type 'StringConstructor' is not assign... Remove this comment to see the full error message
     genres: PropTypes.arrayOf(String).isRequired,
     type: PropTypes.string.isRequired,
 };

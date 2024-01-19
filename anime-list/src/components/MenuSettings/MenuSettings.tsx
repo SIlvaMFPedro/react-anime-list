@@ -6,10 +6,10 @@ import Filter from '../Filter/Filter';
 import Type from "../Type/Type";
 import Category from "../Category/Category";
 
-const MenuSettings = (props) => {
+const MenuSettings = (props: $TSFixMe) => {
     const { setMenu } = props;
 
-    const closeSettings = (event) => {
+    const closeSettings = (event: $TSFixMe) => {
         const { parentNode } = event.currentTarget;
         parentNode.style.animation = 'slide-out 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) 0s';
         setTimeout(() => {

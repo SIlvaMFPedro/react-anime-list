@@ -11,27 +11,27 @@ const initialState = {
     currentPage: 'Home page',
 };
 
-const changeCategory = (category) => ({
+const changeCategory = (category: $TSFixMe) => ({
     type: CHANGE_CATEGORY,
-    payload: category,
+    payload: category
 });
 
-const changeFilter = (filter) => ({
+const changeFilter = (filter: $TSFixMe) => ({
     type: CHANGE_FILTER,
-    payload: filter,
+    payload: filter
 });
 
-const changeType = (type) => ({
+const changeType = (type: $TSFixMe) => ({
     type: CHANGE_TYPE,
-    payload: type,
+    payload: type
 })
 
-const changePage = (page) => ({
+const changePage = (page: $TSFixMe) => ({
     type: CHANGE_PAGE,
-    payload: page,
+    payload: page
 });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: $TSFixMe) => {
     switch(action.type){
         case CHANGE_CATEGORY: {
             return {...state, category: action.payload};

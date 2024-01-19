@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import { changeType } from "../../store/pageDetails/pageDetails";
 
-const Type = (props) => {
+const Type = (props: $TSFixMe) => {
     const dispatch = useDispatch();
+    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     const { type } = useSelector((state) => state.pageDetails);
     const { setMenu, label } = props;
 
-    const onChangeHandlerType = (event) => {
+    const onChangeHandlerType = (event: $TSFixMe) => {
         dispatch(changeType(event.target.value));
         setMenu(false);
     };

@@ -16,11 +16,14 @@ import Sidebar from "../Sidebar/Sidebar";
 // import './Home.css';
 import '../../styles/scss/Home.scss';
 
+// @ts-expect-error TS(2307): Cannot find module '../../assets/images/silhouette... Remove this comment to see the full error message
 import silhouette from '../../assets/images/silhouette.svg';
 
 function Home() {
     const dispatch = useDispatch();
+    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     const { type, category, filter } = useSelector((state) => state.pageDetails);
+    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     const { status, filteredData } = useSelector((state) => state[type]);
     
     // Setup app state variables
@@ -82,7 +85,7 @@ function Home() {
     };
     */
 
-    async function searchAnimeHandler(query) {
+    async function searchAnimeHandler(query: $TSFixMe) {
         try{
             const result = await searchAnime(query);
             
@@ -94,7 +97,7 @@ function Home() {
     }
 
     // Setup event listener handlers
-    const handleSearch = (event) => {
+    const handleSearch = (event: $TSFixMe) => {
         event.preventDefault();
         searchAnimeHandler(search);
         
@@ -123,6 +126,7 @@ function Home() {
             switch(type) {
                 case 'movieAnime': {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchMovieAnime());
                     }
                     dispatch(filterAnimeMovie(category));
@@ -130,6 +134,7 @@ function Home() {
                 }
                 case 'musicAnime': {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchMusicAnime());
                     }
                     dispatch(filterAnimeMusic(category));
@@ -137,6 +142,7 @@ function Home() {
                 }
                 case 'onaAnime': {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchOnaAnime());
                     }
                     dispatch(filterAnimeOna(category));
@@ -144,6 +150,7 @@ function Home() {
                 }
                 case 'ovaAnime': {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchOvaAnime());
                     }
                     dispatch(filterAnimeOva(category));
@@ -151,6 +158,7 @@ function Home() {
                 }
                 case 'specialAnime': {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchSpecialAnime());
                     }
                     dispatch(filterAnimeSpecial(category));
@@ -158,6 +166,7 @@ function Home() {
                 }
                 case 'tvAnime': {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchTvAnime());
                     }
                     dispatch(filterAnimeTv(category));
@@ -165,6 +174,7 @@ function Home() {
                 }
                 default: {
                     if (status === 'iddle'){
+                        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any[], void, As... Remove this comment to see the full error message
                         await dispatch(fetchTvAnime());
                     }
                     dispatch(filterAnimeTv(category));
@@ -180,7 +190,7 @@ function Home() {
 
     useEffect(() => {
 
-        async function sortAnimeData(filter) {
+        async function sortAnimeData(filter: $TSFixMe) {
             const sortTypes = {
                 Popular: 'popularity',
                 Favorite: 'favorites',
@@ -188,9 +198,11 @@ function Home() {
                 Episodes: 'episodes'
             }
 
+            // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const sortProperty = sortTypes[filter];
             if (status === 'completed'){
                 const sortedAnimeData = [...filteredData].sort((a, b) => a[sortProperty] - b[sortProperty])
+                // @ts-expect-error TS(2345): Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
                 setAnimeList(sortedAnimeData);
             }
             console.log(sortProperty);
@@ -201,23 +213,22 @@ function Home() {
 
     }, [filter, status, filteredData])
 
-    return (
-        <>
-            { status === 'completed' ? (
-                <>
-                    <div className="container info">
-                        <img className="firstSilhouette" src={silhouette} alt= ""/>
-                        <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
-                        <p>{`Category: ${category}`}</p>
-                        <p>{`Order: ${filter}`}</p>
-                        <p>{`Results: ${filteredData.length}`}</p>
-                        <img className="secondSilhouette" src={silhouette} alt= "" />
-                    </div>
-                    <MainContent handleSearch={handleSearch} search={search} setSearch={setSearch} animeList={animeList}/>
-                </>
-            ) : <LoadingPage/>}
-        </>
-    );
+    return <>
+        { status === 'completed' ? (
+            <>
+                <div className="container info">
+                    <img className="firstSilhouette" src={silhouette} alt= ""/>
+                    <p>{`Type: ${type.match(/\w+(?=Anime)/g)}`}</p>
+                    <p>{`Category: ${category}`}</p>
+                    <p>{`Order: ${filter}`}</p>
+                    <p>{`Results: ${filteredData.length}`}</p>
+                    <img className="secondSilhouette" src={silhouette} alt= "" />
+                </div>
+                <MainContent handleSearch={handleSearch} search={search} setSearch={setSearch} animeList={animeList}/>
+            </>
+        // @ts-expect-error TS(2786): 'LoadingPage' cannot be used as a JSX component.
+        ) : <LoadingPage/>}
+    </>;
 }
 
 export default Home;
